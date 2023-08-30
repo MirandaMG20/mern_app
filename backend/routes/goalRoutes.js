@@ -6,7 +6,7 @@ const {getGoals, setGoals, updateGoals, deleteGoals} = require('../controllers/g
 
 // router.get('/', getGoals)
 // router.post('/', setGoals)
-router.get('/').get(getGoals).post(setGoals)
+router.route('/').get(getGoals).post(setGoals)
 
 // router.put('/:id', updateGoals)
 // router.delete('/:id', deleteGoals)
