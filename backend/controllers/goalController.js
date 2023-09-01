@@ -61,18 +61,24 @@ const updateGoals = asyncHandler(async (req, res) => {
 })
 
 //@desc     delete goals
-//@route    DELETE /api/goals
+//@route    DELETE /api/goals/:id
 //@access   Private
 const deleteGoals = asyncHandler(async (req, res) => {
-    
+    // Find the id
+    const goal = await Goal.deleteOne(req.params.id)
     // Check if goal exists
     if (!goal) {
         res.status(400)
         throw new Error('Goal not found')
     }
 
-    // Check for user
     const user = await User.findById(req.user.id)
+
+    // Check for user
+    if (!user) {
+        res.status(401)
+        throw new error('User not found')
+    }
 
     // Make sure the logged in user matches the goal user
     if (goal.user.toString() !== user.id) {
@@ -80,8 +86,7 @@ const deleteGoals = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    // Find the id
-    const goal = await Goal.findByIdAndRemove(req.params.id)
+    await goal.deleteOne()
 
     res.status(200).json({ id: req.params.id })
 })
