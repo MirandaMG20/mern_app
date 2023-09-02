@@ -63,7 +63,7 @@ const updateGoals = asyncHandler(async (req, res) => {
 //@access   Private
 const deleteGoals = asyncHandler(async (req, res) => {
     // Find the id
-    const goal = await Goal.deleteOne(req.params.id)
+    const goal = await Goal.findById(req.params.id)
     // Check if goal exists
     if (!goal) {
         res.status(400)
@@ -82,7 +82,7 @@ const deleteGoals = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    await goal.deleteOne()
+    await Goal.findByIdAndRemove(req.param.id)
 
     res.status(200).json({ id: req.params.id })
 })
