@@ -1,14 +1,19 @@
+const path = require('path')
 const express = require('express')
-// Not require
-const colors = require('colors')
-const dotenv = require('dotenv').config()
-const port = process.env.PORT || 3001
 const app = express()
-
-const {errorHandler} = require('./middleware/errorMiddleware') // Not require
+const colors = require('colors') // Not require
+const dotenv = require('dotenv').config()
+const { errorHandler } = require('./middleware/errorMiddleware') // Not require
 const connectDB = require('./config/db')
 
+const port = process.env.PORT || 3002
+
+app.listen(port, () => {
+    console.log(`Server started on port http://localhost:${port}`)
+})
+
 connectDB()
+
 // This 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -17,6 +22,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api/goals', require('./routes/goalRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))
 
-app.use(errorHandler) // Not require
+// Serve Frontend
 
-app.listen(port, () => { console.log(`Server started on port http://localhost:${port}`)})
+app.use(errorHandler) // Not require
