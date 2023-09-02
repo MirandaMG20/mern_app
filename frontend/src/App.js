@@ -12,6 +12,7 @@ function App() {
     <>
       <Router>
         <div className='container'>
+          
           {/* ROUTES */}
           <Header />
           <Routes>
