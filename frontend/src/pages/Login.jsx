@@ -21,20 +21,20 @@ function Login() {
   const dispatch = useDispatch()
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
-      (state) => state.auth
+    (state) => state.auth
   )
 
   useEffect(() => {
     if (isError) {
-        toast.error(message)
+      toast.error(message)
     }
 
     if (isSuccess || user) {
-        navigate('/')
+      navigate('/')
     }
 
     dispatch(reset())
-}, [user, isError, isSuccess, message, navigate, dispatch])
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -54,7 +54,8 @@ function Login() {
     dispatch(login(userData))
   }
 
-  if(isLoading) {
+  // Loading Spinner
+  if (isLoading) {
     return <Spinner />
   }
 

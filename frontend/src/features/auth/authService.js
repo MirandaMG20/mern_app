@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-// Making a call out api/backend
+// API URL Configuration: Making a call out api/backend
 const API_URL = '/api/users/'
 
-//Register User
+// Register User
 const register = async (userData) => {
     const response = await axios.post(API_URL, userData)
 
@@ -16,9 +16,11 @@ const register = async (userData) => {
 
 // Login User
 const login = async (userData) => {
+
     const response = await axios.post(API_URL + 'login', userData)
 
     if (response.data) {
+        // If the login is successful and the API responds with data, the user data is stored in localStorage
         localStorage.setItem('user', JSON.stringify(response.data))
     }
 
@@ -27,6 +29,7 @@ const login = async (userData) => {
 
 // Logout User
 const logout = () => {
+    // The logout function removes the user data from localStorage, effectively logging the user out.
     localStorage.removeItem('user')
 }
 

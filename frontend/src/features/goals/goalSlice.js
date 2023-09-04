@@ -66,12 +66,14 @@ export const deleteGoal = createAsyncThunk(
   }
 )
 
+// The goalSlice defines a reset reducer that resets the state to the initial state.
 export const goalSlice = createSlice({
   name: 'goal',
   initialState,
   reducers: {
     reset: (state) => initialState,
   },
+  // This section handles actions dispatched by the async thunks using the builder object.
   extraReducers: (builder) => {
     builder
       .addCase(createGoal.pending, (state) => {

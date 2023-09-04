@@ -61,6 +61,7 @@ function Register() {
         }
     }
 
+    // Loading Spinner
     if (isLoading) {
         return <Spinner />
     }

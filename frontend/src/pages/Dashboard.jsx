@@ -16,6 +16,8 @@ function Dashboard() {
   const { user } = useSelector((state) => state.auth)
   const { goals, isLoading, isError, message } = useSelector((state) => state.goals)
 
+  // Effect Hook: An effect hook is used to manage side effects and asynchronous operations.
+  // This was not part of the code along and we had to research for it
   useEffect(() => {
     if (!user) {
       navigate("/login")
@@ -32,19 +34,6 @@ function Dashboard() {
       dispatch(reset())
     }
   }, [user, message, isError, dispatch, navigate])
-
-  // useEffect(() => {
-  //   if (isError) {
-  //     console.log(message)
-  //   }
-  //   if (!user) {
-  //     navigate('/login')
-  //   }
-  //   dispatch(getGoals())
-  //   return () => {
-  //     dispatch(reset())
-  //   }
-  // }, [user, navigate, isError, message, dispatch])
 
   if (isLoading) {
     return <Spinner />
